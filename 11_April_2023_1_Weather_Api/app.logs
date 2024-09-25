@@ -1,0 +1,3 @@
+[0mGET /weather [32m200[0m 257.317 ms - 7170[0m
+[0mGET /favicon.ico [33m404[0m 0.830 ms - 150[0m
+[0mGET / [33m404[0m 0.384 ms - 139[0m

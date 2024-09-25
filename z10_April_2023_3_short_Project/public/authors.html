@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/fapple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <style>
+        .mainContainer article {
+            grid-column: 1 / 3;
+        }
+
+        .mainContainer aside {
+            grid-column: 2/3;
+        }
+
+        .categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .category-card {
+            flex: 1 1 calc(33.333% - 20px);
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .category-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .category-card a:hover {
+            background-color: #555;
+        }
+
+        @keyframes move1 {
+            50% {
+                transform: translate3d(20px, 0, 0);
+            }
+        }
+
+        .authors-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .author-card {
+            flex: 1 1 calc(33.333% - 20px);
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .author-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .author-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .author-card h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .author-card p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<div>
+
+    <div class="container">
+        <div class="navheader">
+            <img src="./favicon_io/android-chrome-192x192.png" alt="">
+
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><a href="posts">Posts</a></li>
+                <li><a href="category">Categories</a></li>
+                <li><a href="authors">Authors</a></li>
+                <!-- <li><a href="about">About</a></li> -->
+                <li><a href="contact">contact</a></li>
+
+            </ul>
+
+        </div>
+        <div class="main">
+            <div class="videos">
+                <video autoplay muted loop id="myVideo">
+                    <source src="../public/videos/3163534-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+                <!-- <h1 class="heading">Authors</h1> -->
+                <div class="heading">
+                    <h1>Authors</h1>
+                    <!-- <h1></h1> -->
+                </div>
+            </div>
+            <section>
+                <div class="mainContainer">
+                    <article>
+                        <div class="authors-list">
+                            <div class="author-card">
+                                <img src="https://via.placeholder.com/100" alt="Author 1">
+                                <h3>Author Name 1</h3>
+                                <p>Author 1 is a seasoned writer with a passion for technology and innovation. They have
+                                    been writing for over a
+                                    decade and love to share insights on the latest trends in the industry.</p>
+                            </div>
+                            <div class="author-card">
+                                <img src="https://via.placeholder.com/100" alt="Author 2">
+                                <h3>Author Name 2</h3>
+                                <p>Author 2 specializes in health and wellness. Their articles focus on promoting a
+                                    balanced lifestyle,
+                                    providing readers with practical tips and advice.</p>
+                            </div>
+                            <div class="author-card">
+                                <img src="https://via.placeholder.com/100" alt="Author 3">
+                                <h3>Author Name 3</h3>
+                                <p>With a deep love for travel and exploration, Author 3 brings the world closer to
+                                    readers through their vivid
+                                    storytelling and captivating photography.</p>
+                            </div>
+                            <div class="author-card">
+                                <img src="https://via.placeholder.com/100" alt="Author 4">
+                                <h3>Author Name 4</h3>
+                                <p>Author 4 is an expert in business strategy and entrepreneurship. Their writing is
+                                    aimed at helping startups
+                                    and small businesses grow and succeed.</p>
+                            </div>
+                            <div class="author-card">
+                                <img src="https://via.placeholder.com/100" alt="Author 5">
+                                <h3>Author Name 5</h3>
+                                <p>With a background in education, Author 5 provides valuable resources for students and
+                                    educators alike,
+                                    focusing on modern teaching methods and learning tools.</p>
+                            </div>
+                            <div class="author-card">
+                                <img src="https://via.placeholder.com/100" alt="Author 6">
+                                <h3>Author Name 6</h3>
+                                <p>Author 6 has a flair for culinary arts, sharing delicious recipes and cooking tips
+                                    that inspire readers to
+                                    explore their creativity in the kitchen.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+            <section>
+
+            </section>
+
+        </div>
+        <footer>
+            <p>&copy; 2024 Blog Name. All rights reserved.</p>
+        </footer>
+    </div>
+
+    </body>
+
+</html>

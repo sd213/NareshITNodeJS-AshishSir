@@ -1,0 +1,68 @@
+// sdlkflsdjflkjlsa 
+ 
+ [
+    {
+      "name": "New York",
+      "country": "USA",
+      "population": 8419000,
+      "coordinates": {
+        "latitude": 40.7128,
+        "longitude": -74.0060
+      }
+    },
+    {
+      "name": "Tokyo",
+      "country": "Japan",
+      "population": 13929286,
+      "coordinates": {
+        "latitude": 35.6895,
+        "longitude": 139.6917
+      }
+    },
+    {
+      "name": "London",
+      "country": "United Kingdom",
+      "population": 8982000,
+      "coordinates": {
+        "latitude": 51.5074,
+        "longitude": -0.1278
+      }
+    },
+    {
+      "name": "Sydney",
+      "country": "Australia",
+      "population": 5312163,
+      "coordinates": {
+        "latitude": -33.8688,
+        "longitude": 151.2093
+      }
+    },
+    {
+      "name": "Mumbai",
+      "country": "India",
+      "population": 20185064,
+      "coordinates": {
+        "latitude": 19.0760,
+        "longitude": 72.8777
+      }
+    },
+    {
+      "name": "Paris",
+      "country": "France",
+      "population": 2148327,
+      "coordinates": {
+        "latitude": 48.8566,
+        "longitude": 2.3522
+      }
+    },
+    {
+      "name": "Cape Town",
+      "country": "South Africa",
+      "population": 433688,
+      "coordinates": {
+        "latitude": -33.9249,
+        "longitude": 18.4241
+      }
+    }
+  ]
+

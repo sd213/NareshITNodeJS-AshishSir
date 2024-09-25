@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Cedarville+Cursive&display=swap');
+@import "https://unpkg.com/open-props@1.6.17/easings.min.css";
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    /* font-family: "Cedarville Cursive", cursive; */
+        font-weight: 400;
+        font-style: normal;
+        
+}
+body{
+    min-height: 100vh;
+}
+.container{
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 60px 1fr 100px;
+    /* justify-content: space-between; */
+}
+/* .cont */
+a{
+    text-decoration: none;
+}
+.cedarville-cursive-regular {
+    font-family: "Cedarville Cursive", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* navigation */
+.navheader{
+    height: 60px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px -11px 16px 0px gray;;
+    border: none;
+}
+.navheader img{
+    width: 40px;
+    height: 40px;
+}
+.navheader ul{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.navheader ul li{
+    list-style-type: none;
+}
+.navheader ul li a{
+    text-decoration: none;
+}
+
+/* main */
+.main{
+    /* padding: 30px; */
+}
+.main .videos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 20vh;
+    background-color: transparent;
+    overflow-x: hidden;
+}
+.main .videos video{
+    width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        object-fit: cover;
+}
+
+.main .videos .heading{
+    margin-top: 0;
+        margin-bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        font-size: 120px;
+        color: #ffffff;
+        mix-blend-mode: multiply;
+        position: absolute;
+        top: 0;
+        top: 0;
+        bottom: 0;
+        object-fit: fill;
+    font-family: sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    text-align: center;
+    /* font-size: 100px; */
+    /* height: 20vh; */
+    width: 100%;
+    animation: move1  var(--ease-elastic-in-1) 600ms forwards 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center ;
+}
+.main .videos .heading h1{
+    font-size: 80px;
+}
+@keyframes move1{
+    50% {
+            transform: skew(180deg);
+        }
+}
+
+.main p{
+    font-family: sans-serif;
+    text-align: justify;
+}
+
+/* main section */
+.main section .mainContainer{
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    padding: 20px;
+}
+.main section .mainContainer article{
+    padding:0px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main section .mainContainer article p{
+    letter-spacing: 1.4px;
+    word-spacing: 2.4px;
+    line-height: 2;
+    color: #9696ca;
+        text-shadow: 6px 1px 15px gray;
+}
+.main section .mainContainer article .btns button{
+    padding: 8px 10px;
+}
+/* main section aside */
+.main section .mainContainer aside{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.main section .mainContainer aside h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.main section .mainContainer aside .trend{
+    padding: 10px 20px ;
+    display: flex;
+    gap: 20px;
+    border: none;
+    box-shadow: 1px 0px 6px 0px gray;
+}
+
+.main section .mainContainer aside .trendContainer{
+    display: flex;
+    flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        height: 150px;
+        gap: 10px;
+        /* padding-top: 10px; */
+        padding-bottom: 10px;
+}
+.main section .mainContainer aside .trendContainer .title{
+    color: #ee9518;
+}
+.main section .mainContainer aside .trendContainer .authorDesign{
+    padding:0px 30px;
+    padding-right:10px;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    color: #9696ca;
+}
+
+.main section .mainContainer aside .trendContainer .timestamp{
+    display: flex;
+    justify-content: space-between;
+}
+.main section .mainContainer aside .trendContainer .timestamp .date{
+    font-size: 12px;
+    color: gray;
+}
+/*  */
+.main{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    margin-top: 40px;
+}

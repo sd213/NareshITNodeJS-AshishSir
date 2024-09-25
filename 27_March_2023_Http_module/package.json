@@ -1,0 +1,16 @@
+{
+  "name": "27_march_2023",
+  "version": "1.0.0",
+  "main": "http.js",
+  "scripts": {
+    "start":"node httpfs.js",
+    "dev":"node http.js",
+    "som":"node http3.js",
+    "som2":"nodemon http3.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
