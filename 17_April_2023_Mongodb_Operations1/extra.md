@@ -48,39 +48,87 @@ run().catch(console.dir);
 
 ## Normal Searching For data
 
+### To Find all Data In given collection(Restaurants..)
+
 db.restaurants.find({})
+
+### To Find all Data in given collection(Restaurants..) based on condition and show data based on projection
+
 db.restaurants.find({condition},{projection})
+
 projection value is either 1 or 0
+
+### In MongoDB, the find() method allows you to query the database for documents in a collection. You can filter documents using a condition (filter) and return only specific fields using a projection'.'
+
+### Syntax
+
+db.collection.find({<condition>}, {<projection>})
+
+### condition: This specifies the filter criteria for retrieving documents'.'
+
+### projection: This specifies which fields should be included or excluded in the result'.'
+
+1: Include the field.
+0: Exclude the field.
 
 ## projection
 
- db.restaurants.find({},{restaurant_name:1}) :used to find documents in the restaurants collection and project (select) only the restaurant_name field.
- db.restaurants.find({},{restaurant_name:1,cost:1}) : it will give results on with only restaurants and cost.
- db.restaurants.find({},{restaurant_name:1,cost:0}) : MongoServerError[Location31254]: Cannot do exclusion on field cost in inclusion projection
+### To find documents in the restaurants collection and project (select) only the restaurant_name field
 
-db.restaurants.find({},{restaurant_name:1,cost:1,_id:0}) : here it is allowed because by default '_id' is allowed in projection.
+db.restaurants.find({},{restaurant_name:1})
 
-## projection with condition
+### To give results on with only restaurants and cost
+
+ db.restaurants.find({},{restaurant_name:1,cost:1}) //by default comes with _id
+
+### MongoServerError[Location31254]: Cannot do exclusion on field cost in inclusion projection
+
+ db.restaurants.find({},{restaurant_name:1,cost:0}) 
+
+### To Hide _id Which is allowed display automatically . fort aht MongoServerError won't show
+
+db.restaurants.find({},{restaurant_name:1,cost:1,_id:0}) //here it is allowed because by default '_id' is allowed in projection.
+
+### projection with condition
 
  db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0})
 
-## Sorting
+## Sorting (use sort({fieldtobeSorted:valueusedtochoosesortedmanner}))
 
   for sorting value is either 1 , -1;
   
- db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({cost:1}) :- sorting based on ascending order of cost .
+### Sorting based on ascending order of cost
 
-db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({cost:-1}) :- sorting based on descending order of cost .
+db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({cost:1}) :-  .
 
-db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({cost:0}) :- MongoInvalidArgumentError: Invalid sort direction: 0
+### Sorting based on ascending order of restaurant_name
+  
+db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({restaurant_name:1})
 
-db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({restaurant_name:1}) :- sorting based on ascending order of restaurant_name
+### Sorting based on descending order of cost
 
-## skipping some row
+db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({cost:-1}) :-  .
 
-db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({restaurant_name:1}).limit(2) :- gives only first 2 records  without skipping
+### MongoInvalidArgumentError: Invalid sort direction: 0
 
- db.restaurants.find({},{restaurant_name:1}).sort({}).limit(5) :- gives only first five records without skipping
+db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({cost:0})
+
+
+## Limiting Upto Some Row
+
+### gives only first 2 records
+
+  db.restaurants.find({state_id:1},{ state_id:1,restaurant_name:1,cost:1,_id:0}).sort({restaurant_name:1}).limit(2)
+                 <!--   conditions -->  <!--Projections       ->                   <!--Sorting Condition-->  <!--limiting ->
+## skipping some row(Using Skipping)
+
+### gives only first 2 records  without skipping
+
+db.restaurants.find({state_id:1},{restaurant_name:1,cost:1,_id:0}).sort({restaurant_name:1}).limit(2)
+
+### Gives only first five records without skipping
+
+  db.restaurants.find({},{restaurant_name:1}).sort({}).limit(5)
 
 ### with skipping
 
@@ -113,7 +161,7 @@ db.users.updateOne({ name : 'msom' }, { $set: { name: 'som' } }); :- for updatin
    db.users.updateOne({"name":"smith"},{$unset:{name:0}});
 in both case it just remove name column.
 
-### to do update multiple data traditional way 
+### to do update multiple data traditional way
 
  db.users.update({"name":null},{$unset:{city:0},$set:{district:"Khordha"}},{multi:true});
 

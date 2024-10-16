@@ -9,22 +9,23 @@
     db.restaurants.find({"mealTypes.mealtype_id":2}) //without projection
     db.restaurants.find({"mealTypes.mealtype_id":2},{restaurant_name:1,mealTypes:1,_id:0}) // with projection
 
-## in query :- helps to use multiple condition
+### in query :- helps to use multiple condition
 
-db.restaurants.find({"mealTypes.mealtype_id":{$in:[1,3,5]}},{restaurant_name:1,mealTypes:1,_id:0})
+    db.restaurants.find({"mealTypes.mealtype_id":{$in:[1,3,5]}},{restaurant_name:1,mealTypes:1,_id:0})
 
-## gt and lt
+### gt and lt
 
-### lt
+#### lt
 
-db.restaurants.find({"cost":{$lt:500}},{restaurant_name:1,mealTypes:1,cost:1,_id:0}) :- to find where cost less than 500
+    db.restaurants.find({"cost":{$lt:500}},{restaurant_name:1,mealTypes:1,cost:1,_id:0}) :- to find where cost less than 500
 
-### gt
+    db.restaurants.find({"cost":{$lt:500},"mealTypes.mealtype_id":{$in:[1,3,5]}},{restaurant_name:1,mealTypes:1,_id:0})
+    
+#### gt
 
- db.restaurants.find({"cost":{$gt:500}},{restaurant_name:1,mealTypes:1,cost:1,_id:0}) :- to find where cost greater than 500
+    db.restaurants.find({"cost":{$gt:500}},{restaurant_name:1,mealTypes:1,cost:1,_id:0}) :- to find where cost greater than 500
 
-### range
+#### range
 
-db.restaurants.find({"cost":{$gt:500,$lt:1000}},{restaurant_name:1,mealTypes:1,cost:1,_id:0})
+    db.restaurants.find({"cost":{$gt:500,$lt:1000}},{restaurant_name:1,mealTypes:1,cost:1,_id:0})
 
-db.restaurants.find({"cost":{$lt:500},"mealTypes.mealtype_id":{$in:[1,3,5]}},{restaurant_name:1,mealTypes:1,_id:0})

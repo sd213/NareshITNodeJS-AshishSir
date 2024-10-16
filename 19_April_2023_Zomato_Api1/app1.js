@@ -12,7 +12,6 @@ import { config } from "dotenv";
 config();
 let auth = process.env.AUTH_KEY;
 
-
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(cors());
@@ -42,7 +41,11 @@ app.get("/city", async (req, res) => {
       res.send(output);
     } else {
       const output = [];
-      const cursor = mClient.db("nareshITzomato").collection("location").find({}).project({ location_name: 1, _id: 0 });
+      const cursor = mClient
+        .db("nareshITzomato")
+        .collection("location")
+        .find({})
+        .project({ location_name: 1, _id: 0 });
       for await (const data of cursor) {
         output.push(data);
       }
@@ -61,7 +64,7 @@ app.get("/city", async (req, res) => {
 });
 
 // List of all restaurants
-app.get("/restaurants/all", async (req, res) => {
+app.get("/restaurants", async (req, res) => {
   const apiKey = req.headers["x-api-key"]; // Get API key from headers .so key has to be passed in headers
   if (!apiKey) {
     return res.status(401).json({ error: "API key missing" });
@@ -73,7 +76,11 @@ app.get("/restaurants/all", async (req, res) => {
       res.send(output);
     } else {
       const output = [];
-      const cursor = mClient.db("nareshITzomato").collection("restaurants").find({}).project({ restaurant_name: 1, _id: 0 });
+      const cursor = mClient
+        .db("nareshITzomato")
+        .collection("restaurants")
+        .find({})
+        .project({ restaurant_name: 1, _id: 0 });
       for await (const data of cursor) {
         output.push(data);
       }
@@ -91,140 +98,93 @@ app.get("/restaurants/all", async (req, res) => {
 });
 
 // * Restaurants w.r.t City
-app.get("/restaurants/city/:city",async (req,res)=>{
-    // console.log(req.params.city);
-    let city = req.params.city;
-    let query={}
-    if(city!=null){
-        query={address:city}
+app.get("/restaurants/city/:city", async (req, res) => {
+  // console.log(req.params.city);
+  let city = req.params.city;
+  let query = {};
+  if (city != null) {
+    query = { address: city };
+  }
+  await rClient.connect();
+  let result = await rClient.get("restaurants in " + city);
+  if (result) {
+    const output = JSON.parse(result);
+    res.send(output);
+  } else {
+    const output = [];
+    const cursor = mClient
+      .db("nareshITzomato")
+      .collection("restaurants")
+      .find(query);
+    for await (const data of cursor) {
+      output.push(data);
     }
-    await rClient.connect();
-    let result = await rClient.get("restaurants in "+city);
-    if(result){
-        const output = JSON.parse(result);
-        res.send(output);
-    }else{
-        const output = [];
-        const cursor = mClient.db("nareshITzomato").collection("restaurants").find(query);
-        for await (const data of cursor){
-            output.push(data);
-        }
-        await rClient.set(
-          "restaurants in " + city,
-          JSON.stringify({ source: "Redis Cache", output })
-        );
-         cursor.closed;
-         res.send({ source: "Mongo DB", output });
-    }
-     await rClient.disconnect();
-
-})
+    await rClient.set(
+      "restaurants in " + city,
+      JSON.stringify({ source: "Redis Cache", output })
+    );
+    cursor.closed;
+    res.send({ source: "Mongo DB", output });
+  }
+  await rClient.disconnect();
+});
 
 // Restaurants w.r.t StateId
 
 app.get("/restaurants/state", async (req, res) => {
-
   let stateId = req.query.stateId;
   let query = {};
-  if (stateId !=null) {
-    stateId=Number(stateId);
+  if (stateId != null) {
+    stateId = Number(stateId);
     query = { state_id: stateId };
-     await rClient.connect();
-     let result = await rClient.get("restaurants in state" + stateId);
-     if (result) {
-       const output = JSON.parse(result);
-       res.send(output);
-     } else {
-       const output = [];
-       const cursor = mClient.db("nareshITzomato").collection("restaurants").find(query);
-       for await (const data of cursor) {
-         output.push(data);
-       }
-       await rClient.set(
-         "restaurants in state" + stateId,
-         JSON.stringify({ source: "Redis Cache", output })
-       );
-       cursor.closed;
-       res.send({ source: "Mongo DB", output });
-     }
-     await rClient.disconnect();
-  }
-  else{
-     res.status(404).json({ error: "Not Found" });
-  }
- 
-});
-
-// * List of meals
-app.get("/meals", async (req, res) => {
-  
-
     await rClient.connect();
-    let result = await rClient.get("meals");
+    let result = await rClient.get("restaurants in state" + stateId);
     if (result) {
       const output = JSON.parse(result);
       res.send(output);
     } else {
       const output = [];
-      const cursor = mClient.db("nareshITzomato").collection("mealType").find();
+      const cursor = mClient
+        .db("nareshITzomato")
+        .collection("restaurants")
+        .find(query);
       for await (const data of cursor) {
         output.push(data);
       }
       await rClient.set(
-        "meals",
+        "restaurants in state" + stateId,
         JSON.stringify({ source: "Redis Cache", output })
       );
       cursor.closed;
       res.send({ source: "Mongo DB", output });
     }
     await rClient.disconnect();
-  
+  } else {
+    res.status(404).json({ error: "Not Found" });
+  }
 });
-
-
-// * Restaurant on the basis of Meal Type 
-// * Restaurants based state Id and Meal Type
-app.get("/restaurants",async(req,res)=>{
-  let query={}
-  let stateId = Number(req.query.stateId);
-  let mealId = Number(req.query.mealId);
-  console.log(stateId,mealId);
-  if(stateId&&mealId){
-    query={
-      state_id:stateId,
-      "mealTypes.mealtype_id":mealId
-    };
-  }
-  if(stateId){
-      
-     query={state_id:stateId};
-  }else if(mealId){
-     query={"mealTypes.mealtype_id":mealId}
-  }else{
-    query={}
-  }
+// * List of meals
+app.get("/meals", async (req, res) => {
   await rClient.connect();
-     let result = await rClient.get("restaurants");
-     if (result) {
-       const output = JSON.parse(result);
-       res.send(output);
-     } else {
-       const output = [];
-       const cursor = mClient.db("nareshITzomato").collection("restaurants").find(query);
-       for await (const data of cursor) {
-         output.push(data);
-       }
-       await rClient.set(
-         "restaurants",
-         JSON.stringify({ source: "Redis Cache", output })
-       );
-       cursor.closed;
-       res.send({ source: "Mongo DB", output });
-     }
-     await rClient.disconnect();
-})
-
-
+  let result = await rClient.get("meals");
+  if (result) {
+    const output = JSON.parse(result);
+    res.send(output);
+  } else {
+    const output = [];
+    const cursor = mClient.db("nareshITzomato").collection("mealType").find();
+    for await (const data of cursor) {
+      output.push(data);
+    }
+    await rClient.set(
+      "meals",
+      JSON.stringify({ source: "Redis Cache", output })
+    );
+    cursor.closed;
+    res.send({ source: "Mongo DB", output });
+  }
+  await rClient.disconnect();
+});
 
 // ## page 2
 

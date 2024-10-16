@@ -16,8 +16,8 @@ let transporter = nodemailer.createTransport(
 let mailOption = {
     from:process.env.user,
     to:'somitdas001element@gmail.com',
-    subject:'Sending Email Using NodeJS',
-    text:"This som who is Learning NodeJS"
+    subject:'Sending Email Using AngularS',
+    text:"This som who is Learning AngularJS"
 }
 transporter.sendMail(mailOption,(err,info)=>{
     if(err) console.log(err);
